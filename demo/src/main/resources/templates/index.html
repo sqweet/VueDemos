@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HELLO</title>
+
+</head>
+<style>
+    .class1{
+        background: black;
+        color: aliceblue;
+    }
+    #name1{
+        color: aqua;
+    }
+    #name2{
+        color: blueviolet;
+    }
+</style>
+<body>
+    <div id="title">
+        {{ message }}
+    </div>
+    <br><br>
+
+    <div id="demo1">
+        <label for="cb1">{{ label }}</label><input type="checkbox" v-model="change" id="cb1">
+
+        <div v-bind:class="{'class1':change}">
+            v-bind : change color
+        </div>
+    </div>
+    <br><br>
+    <div id="demo2">
+        {{ 3+5 }}<br>
+        {{ ok ? 'yes' : 'no'}}<br>
+        <!--split()方法用于把一个字符串分割成字符串数组。
+         reverse() 方法用于颠倒数组中元素的顺序。
+         join() 方法用于把数组中的所有元素放入一个字符串。-->
+        {{ message.split('').reverse().join('') }}
+        <div v-bind:id="'name' + id">v-bind 设置的id</div>
+    </div>
+    <br>
+
+    <div id="demo3">
+
+        <p v-if="ok">指令是带有 v- 前缀的特殊属性</p>
+        <template v-if="seen">
+            <p>指令用于在表达式的值改变时</p>
+            <p>将某些行为应用到 DOM 上。</p>
+        </template>
+    </div>
+    <br>
+
+    <div id="demo4">
+        <p>参数在指令后以冒号指明。例如， v-bind 指令被用来响应地更新 HTML 属性：</p>
+        <pre><a v-bind:href="url">菜鸟教程Vue</a></pre>
+    </div>
+    <br>
+
+    <div id="demo5">
+        <p>{{ message }}</p>
+        <input type="text" v-model="message">
+    </div>
+    <br>
+    
+    <div id="demo6">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse!</button>
+    </div>
+    <br>
+
+    <div id="demo7">
+        {{ message | capitalize }}
+
+    </div>
+    <br>
+
+    <div id="demo8">
+        {{ message | capitalize }}
+        <br>
+        <input type="text" v-model="message">
+    </div>
+    <br>
+
+    <div id="demo9">
+        <div v-if="Math.random() > 0.5">
+            Good morning
+        </div>
+        <div v-else>
+            Good afternoon
+        </div>
+    </div>
+    <br>
+
+    <div id="demo10">
+        <ol>
+            <li v-for="site in sites">
+                {{ site.name }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="demo11">
+        <ol>
+            <template v-for="site in sites">
+                <li>{{ site.name }}</li>
+                <li>--------------</li>
+            </template>
+        </ol>
+    </div>
+    <br>
+
+    <div id="demo12">
+        <ul>
+            <li v-for="value in object">
+                {{ value }}
+            </li>
+        </ul>
+    </div>
+
+    <div id="demo13">
+        <ul>
+            <li v-for="(value, key, index) in object">
+                {{ index }} : {{ key }} : {{ value }}
+            </li>
+        </ul>
+    </div>
+
+    <div id="demo14">
+        <ul>
+            <li v-for="n in 10">
+                {{ n }}
+            </li>
+        </ul>
+    </div>
+    <br>
+
+    <div id="demo15">
+        <p>原始字符串: {{ message }}</p>
+        <p>翻转字符串: {{ reverseMessage }}</p>
+    </div>
+    <br>
+
+    <div id="demo16">
+        <p>{{ site }}</p>
+    </div>
+
+    <div id="demo17">
+        <p id="tips">计数器喵</p>
+        <p>counter: {{ counter }}</p>
+        <button @click="counter++">点我点我点我</button>
+    </div>
+    <br>
+
+    <div id="demo18">
+        <p id="tips2">汇率转换</p>
+        <p id="tips3"> </p>
+        <label for="cnyInput">CNY</label><input id="cnyInput" type="text" v-model="cny">
+        <label for="usdInput">USD</label><input id="usdInput" type="text" v-model="usd">
+    </div>
+    
+    <br><br><br>
+    
+    <p>购物车</p>
+    <div id="shoppingCart">
+        <table>
+            <tr>
+                <th>商品名</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="goods in goodsJson">
+                <td>{{ goods.name }}</td>
+                <td>{{ goods.price }}</td>
+                <td>
+<!--                    <button v-bind:disable="goods.count === 0" @click="goods.count -= 1">-</button>-->
+                    {{ goods.count }}
+<!--                    <button @click="goods.count++">+</button>-->
+                </td>
+
+                <td>
+                    <button @click="goods.count = 0">移除</button>
+                </td>
+            </tr>
+        </table>
+        总价：${{ totalPrise() }}
+    </div>
+    <div id="app">
+        <table>
+            <tr>
+<!--                <th>序号</th>-->
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>购买数量</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="iphone in Ip_Json">
+<!--                <td>{{ iphone.id }}</td>-->
+                <td>{{ iphone.name }}</td>
+                <td>{{ iphone.price }}</td>
+                <td>
+                    <button v-bind:disabled="iphone.count === 0" v-on:click="iphone.count-=1">-</button>
+                    {{ iphone.count }}
+                    <button v-on:click="iphone.count+=1">+</button>
+                </td>
+                <td>
+                    <button v-on:click="iphone.count=0">移除</button>
+                </td>
+            </tr>
+        </table>
+        总价：${{totalPrice()}}
+    </div>
+</body>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="/index.js"></script>
+</html>
